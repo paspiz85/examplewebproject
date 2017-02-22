@@ -1,0 +1,9 @@
+#Build Information
+#${build.timestamp}
+
+app.name=${app.name}
+app.version=${app.version}
+
+build.date=${build.timestamp}
+build.branch=${build.branch}
+build.number=${build.number}

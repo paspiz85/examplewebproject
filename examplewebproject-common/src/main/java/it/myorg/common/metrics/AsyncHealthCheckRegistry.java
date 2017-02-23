@@ -43,20 +43,23 @@ public class AsyncHealthCheckRegistry extends HealthCheckRegistry implements Ini
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        this.healthCheckBackgroundTask = () -> {
-            Timer.Context timer = null;
-            if (healthCheckExecutionTimer != null) {
-                timer = healthCheckExecutionTimer.time();
-            }
-            try {
-                if (healthCheckExecutor == null) {
-                    results = AsyncHealthCheckRegistry.super.runHealthChecks();
-                } else {
-                    results = AsyncHealthCheckRegistry.super.runHealthChecks(healthCheckExecutor);
+        this.healthCheckBackgroundTask = new Runnable() {
+            @Override
+            public void run() {
+                Timer.Context timer = null;
+                if (healthCheckExecutionTimer != null) {
+                    timer = healthCheckExecutionTimer.time();
                 }
-            } finally {
-                if (timer != null) {
-                    timer.stop();
+                try {
+                    if (healthCheckExecutor == null) {
+                        results = AsyncHealthCheckRegistry.super.runHealthChecks();
+                    } else {
+                        results = AsyncHealthCheckRegistry.super.runHealthChecks(healthCheckExecutor);
+                    }
+                } finally {
+                    if (timer != null) {
+                        timer.stop();
+                    }
                 }
             }
         };

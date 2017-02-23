@@ -34,7 +34,7 @@
         <build.number>0</build.number>
 
         <!-- Versions parameters -->
-        <java-version>1.8</java-version>
+        <java-version>1.7</java-version>
         <maven-version>3.2.1</maven-version>
         <plugin.maven.surefire.version>2.18.1</plugin.maven.surefire.version>
         <plugin.maven.jacoco.version>0.7.7.201606060606</plugin.maven.jacoco.version>

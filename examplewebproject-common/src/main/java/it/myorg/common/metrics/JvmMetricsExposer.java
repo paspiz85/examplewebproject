@@ -35,7 +35,12 @@ public class JvmMetricsExposer implements InitializingBean {
 
         public Map<String, Metric> getMetrics() {
             HashMap<String, Metric> gauges = new HashMap<>();
-            gauges.put("jvm.uptime", (Gauge) () -> ManagementFactory.getRuntimeMXBean().getUptime());
+            gauges.put("jvm.uptime", new Gauge() {
+                @Override
+                public Object getValue() {
+                    return ManagementFactory.getRuntimeMXBean().getUptime();
+                }
+            });
             return Collections.unmodifiableMap(gauges);
         }
     }

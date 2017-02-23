@@ -207,6 +207,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
+                <!--
                 <dependencies>
                     <dependency>
                         <groupId>hcom.maven</groupId>
@@ -214,6 +215,7 @@
                         <version>RELEASE</version>
                     </dependency>
                 </dependencies>
+                -->
                 <executions>
                     <execution>
                         <id>enforce-versions</id>
@@ -234,6 +236,7 @@
                             <fail>true</fail>
                         </configuration>
                     </execution>
+                    <!--
                     <execution>
                         <id>enforce-no-release</id>
                         <goals>
@@ -246,6 +249,7 @@
                             <fail>${enforce-no-release.fail}</fail>
                         </configuration>
                     </execution>
+                    -->
                     <execution>
                         <id>enforce-banned-dependencies</id>
                         <goals>

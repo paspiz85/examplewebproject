@@ -16,7 +16,6 @@
     <properties>
         <main.basedir>${project.parent.basedir}</main.basedir>
         <selenium.version>2.43.0</selenium.version>
-        <reserve-network-port.skip>false</reserve-network-port.skip>
         <tomcat.wardir>${project.parent.basedir}/examplewebproject/target/war</tomcat.wardir>
     </properties>
 
@@ -73,27 +72,6 @@
                 <configuration>
                     <skip>true</skip>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <configuration>
-                    <skip>${reserve-network-port.skip}</skip>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>reserve-network-port</id>
-                        <phase>initialize</phase>
-                        <configuration>
-                            <portNames>
-                                <portName>test.tomcat.http.port</portName>
-                            </portNames>
-                        </configuration>
-                        <goals>
-                            <goal>reserve-network-port</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -197,5 +175,33 @@
             </exclusions>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>reserve-network-port</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>reserve-network-port</id>
+                                <phase>initialize</phase>
+                                <configuration>
+                                    <portNames>
+                                        <portName>test.tomcat.http.port</portName>
+                                    </portNames>
+                                </configuration>
+                                <goals>
+                                    <goal>reserve-network-port</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

@@ -15,8 +15,9 @@
 
     <properties>
         <main.basedir>${project.parent.basedir}</main.basedir>
-        <tomcat.wardir>${project.parent.basedir}/examplewebproject/target/war</tomcat.wardir>
         <selenium.version>2.43.0</selenium.version>
+        <reserve-network-port.skip>false</reserve-network-port.skip>
+        <tomcat.wardir>${project.parent.basedir}/examplewebproject/target/war</tomcat.wardir>
     </properties>
 
     <build>
@@ -76,6 +77,9 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
+                <configuration>
+                    <skip>${reserve-network-port.skip}</skip>
+                </configuration>
                 <executions>
                     <execution>
                         <id>reserve-network-port</id>
